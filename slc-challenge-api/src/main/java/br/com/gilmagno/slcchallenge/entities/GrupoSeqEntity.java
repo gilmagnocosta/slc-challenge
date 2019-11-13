@@ -1,22 +1,25 @@
 package br.com.gilmagno.slcchallenge.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @Entity
 @Table(name = "GrupoSeq")
 public class GrupoSeqEntity {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@JsonProperty("NumSeq")
+	@XStreamAlias("NumSeq")
 	private Integer numSeq;
 	
-	@JsonProperty("IndrCont")
+	@XStreamAlias("IndrCont")
 	private String indrCont;
 	
 	public Integer getNumSeq() {

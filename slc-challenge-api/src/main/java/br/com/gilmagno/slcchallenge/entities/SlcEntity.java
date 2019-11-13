@@ -1,25 +1,30 @@
 package br.com.gilmagno.slcchallenge.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @Entity
 @Table(name = "Slc")
+@XStreamAlias("DOC")
 public class SlcEntity {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne
-	@JsonProperty("BCMSG")
+	@OneToOne(cascade = CascadeType.ALL)
+	@XStreamAlias("BCMSG")
 	private BcMsgEntity bcMsg;
 	
-	@OneToOne
-	@JsonProperty("SISMSG")
+	@OneToOne(cascade = CascadeType.ALL)
+	@XStreamAlias("SISMSG")
 	private SisMsgEntity sisMsg;
 	
 	public BcMsgEntity getBcMsg() {

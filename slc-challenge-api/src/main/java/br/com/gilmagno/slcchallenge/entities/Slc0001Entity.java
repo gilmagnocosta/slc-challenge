@@ -2,40 +2,44 @@ package br.com.gilmagno.slcchallenge.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @Entity
 @Table(name = "Slc001")
 public class Slc0001Entity {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@JsonProperty("CodMsg")
+
+	@XStreamAlias("CodMsg")
 	private String codMsg;
-	
-	@JsonProperty("NumCtrlSLC")
+
+	@XStreamAlias("NumCtrlSLC")
 	private String numCtrlSlc;
 	
-	@JsonProperty("ISPBIF")
+	@XStreamAlias("ISPBIF")
 	private String IspBif;
 	
-	@JsonProperty("TpInf")
+	@XStreamAlias("TpInf")
 	private String tpInf;
 	
-	@OneToOne
-	@JsonProperty("Grupo_SLC0001_Liquid")
+	@OneToOne(cascade = CascadeType.ALL)
+	@XStreamAlias("Grupo_SLC0001_Liquid")
 	private GrupoSlc0001LiquidEntity grupo_SLC0001_Liquid;
 	
-	@JsonProperty("DtHrSLC")
+	@XStreamAlias("DtHrSLC")
 	private Date dtHrSLC;
 	
-	@JsonProperty("DtMovto")
+	@XStreamAlias("DtMovto")
 	private Date dtMovto;
 	
 	public String getCodMsg() {
@@ -60,7 +64,7 @@ public class Slc0001Entity {
 		return tpInf;
 	}
 	public void setTpInf(String tpInf) {
-		tpInf = tpInf;
+		this.tpInf = tpInf;
 	}
 	public GrupoSlc0001LiquidEntity getGrupo_SLC0001_Liquid() {
 		return grupo_SLC0001_Liquid;

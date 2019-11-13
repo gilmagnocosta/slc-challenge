@@ -1,46 +1,50 @@
 package br.com.gilmagno.slcchallenge.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @Entity
 @Table(name = "GrupoSlc0001LiquidProdt")
+@XStreamAlias("Grupo_SLC0001_LiquidProdt")
 public class GrupoSlc0001LiquidProdtEntity {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@JsonProperty("IdentLinhaBilat")
+	@XStreamAlias("IdentdLinhaBilat")
     private String identdLinhaBilat;
 	
-	@JsonProperty("TpDeb_Cred")
+	@XStreamAlias("TpDeb_Cred")
     private String tpDeb_Cred;
 	
-	@JsonProperty("ISPBIFCredtd")
+	@XStreamAlias("ISPBIFCredtd")
     private String iSPBIFCredtd;
 	
-	@JsonProperty("ISPBIFDebtd")
+	@XStreamAlias("ISPBIFDebtd")
     private String iSPBIFDebtd;
 	
-	@JsonProperty("VlrLanc")
+	@XStreamAlias("VlrLanc")
     private double vlrLanc;
 	
-	@JsonProperty("CNPJNLiqdantDebtd")
+	@XStreamAlias("CNPJNLiqdantDebtd")
     private String cNPJNLiqdantDebtd;
 	
-	@JsonProperty("NomCliDebtd")
+	@XStreamAlias("NomCliDebtd")
     private String nomCliDebtd;
     
-    @JsonProperty("CNPJNLiqdantCredtd")
+    @XStreamAlias("CNPJNLiqdantCredtd")
     private String cNPJNLiqdantCredtd;
     
-    @JsonProperty("NomCliCredtd")
+    @XStreamAlias("NomCliCredtd")
     private String nomCliCredtd;
     
-    @JsonProperty("TpTranscSLC")
+    @XStreamAlias("TpTranscSLC")
     private String tpTranscSLC;
 	
     public String getIdentdLinhaBilat() {

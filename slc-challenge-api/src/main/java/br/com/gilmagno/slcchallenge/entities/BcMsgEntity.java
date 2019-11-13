@@ -1,38 +1,42 @@
 package br.com.gilmagno.slcchallenge.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @Entity
 @Table(name = "BcMsg")
 public class BcMsgEntity {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column
-	@JsonProperty("IdentdEmissor")
+	@XStreamAlias("IdentdEmissor")
 	private Integer identdEmissor;
 	
 	@Column
-	@JsonProperty("IdentdDestinatario")
+	@XStreamAlias("IdentdDestinatario")
 	private Integer identdDestinatario;
 
-	@OneToOne
-	@JsonProperty("Grupo_Seq")
+	@OneToOne(cascade = CascadeType.ALL)
+	@XStreamAlias("Grupo_Seq")
 	private GrupoSeqEntity grupo_Seq;
 	
 	@Column
-	@JsonProperty("DomSist")
+	@XStreamAlias("DomSist")
 	private String domSist;
 	
 	@Column
-	@JsonProperty("NUOp")
+	@XStreamAlias("NUOp")
 	private String nuop;
 	
 	
