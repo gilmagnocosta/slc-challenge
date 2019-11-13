@@ -19,12 +19,16 @@ public class SlcController {
 	
 	@GetMapping
 	public ResponseEntity<SlcEntity> getSlcService() {
+		
 		try {
+			
 			SlcEntity slc = slcService.getSlcData();
+			
 			return ResponseEntity.ok().body(slc);
 			
 		} catch (SlcServiceException e) {
 			return ResponseEntity.notFound().build();
 		}
+		
 	}
 }

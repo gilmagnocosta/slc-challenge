@@ -10,14 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import br.com.gilmagno.slcchallenge.entities.GrupoSlc0001LiquidEntity;
-import br.com.gilmagno.slcchallenge.entities.GrupoSlc0001LiquidProdtEntity;
-import br.com.gilmagno.slcchallenge.entities.GrupoSlc0001ProdtEntity;
-import br.com.gilmagno.slcchallenge.entities.Slc0001Entity;
 import br.com.gilmagno.slcchallenge.entities.SlcEntity;
 import br.com.gilmagno.slcchallenge.exceptions.SlcServiceException;
 import br.com.gilmagno.slcchallenge.helpers.XmlHelper;
@@ -31,11 +26,19 @@ public class SlcServiceImpl implements SlcService {
 	@Autowired
 	private SlcRepository slcRepository;
 	
+	/**
+	 * Faz a carga do arquivo XML
+	 */
 	@Override
 	public SlcEntity getSlcData() throws SlcServiceException {
 		return loadXmlFile();
 	}
 	
+	/**
+	 * Le arquivo XML e grava no banco de dados
+	 * @return
+	 * @throws SlcServiceException
+	 */
 	private SlcEntity loadXmlFile() throws SlcServiceException {
 		
 		List<SlcEntity> slcEntity = slcRepository.findAll();
@@ -66,17 +69,29 @@ public class SlcServiceImpl implements SlcService {
 		}
 	}
 
+	/**
+	 * Obtem objeto XStream para tratamento de XML
+	 * @return
+	 */
 	private XStream getXStreamObject() {
 		XStream xstream = new XStream(new DomDriver());
 		
 		xstream.processAnnotations(SlcEntity.class);
 		
-		String[] dateFormat = {"dd/MM/yyyy HH:mm:ss", "dd/MM/yyyy"};
-		
-		xstream.registerConverter(new com.thoughtworks.xstream.converters.basic.DateConverter("yyyy-MM-dd", dateFormat));
+		xstream.registerConverter(new com.thoughtworks.xstream.converters.basic.DateConverter("yyyy-MM-dd", getDateFormats()));
 		
 		xstream.ignoreUnknownElements();
 		
 		return xstream;
+	}
+	
+	/**
+	 * Obtem formatação de datas do XML
+	 * @return Array com formatos de datas
+	 */
+	private String[] getDateFormats() {
+		String[] dateFormats = {"dd/MM/yyyy HH:mm:ss", "dd/MM/yyyy"};
+		
+		return dateFormats;
 	}
 }
