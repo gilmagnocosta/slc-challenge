@@ -47,7 +47,9 @@ public class SlcServiceImpl implements SlcService {
 			slcRepository.deleteAll();
 		}
 		
-		File file = new File(getClass().getClassLoader().getResource(XML_FILE).getFile());
+		ClassLoader cl = this.getClass().getClassLoader();
+		
+		File file = new File(cl.getResource(XML_FILE).getFile());
 		
 		String xml;
 		
