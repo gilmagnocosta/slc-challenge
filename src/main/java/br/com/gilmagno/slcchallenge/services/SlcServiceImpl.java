@@ -1,7 +1,5 @@
 package br.com.gilmagno.slcchallenge.services;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,12 +46,15 @@ public class SlcServiceImpl implements SlcService {
 			slcRepository.deleteAll();
 		}
 		
-		InputStream inputStream = this.getClass().getResourceAsStream(XML_FILE);
+
+		ClassLoader cl = this.getClass().getClassLoader();
+		
+		InputStream is = cl.getResourceAsStream(XML_FILE);
 
 		String xml;
 		
 		try {
-			xml = XmlHelper.inputStreamToString(inputStream);
+			xml = XmlHelper.inputStreamToString(is);
 			
 			XStream xstream = getXStreamObject();
 			
