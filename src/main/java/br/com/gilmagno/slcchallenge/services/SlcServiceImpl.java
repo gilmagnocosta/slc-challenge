@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,12 +48,12 @@ public class SlcServiceImpl implements SlcService {
 			slcRepository.deleteAll();
 		}
 		
-		File file = new File(getClass().getClassLoader().getResource(XML_FILE).getFile());
-		
+		InputStream inputStream = this.getClass().getResourceAsStream(XML_FILE);
+
 		String xml;
 		
 		try {
-			xml = XmlHelper.inputStreamToString(new FileInputStream(file));
+			xml = XmlHelper.inputStreamToString(inputStream);
 			
 			XStream xstream = getXStreamObject();
 			
